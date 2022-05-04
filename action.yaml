@@ -1,0 +1,19 @@
+name: 'secrets-manager'
+inputs:
+  path:
+    required: true
+  prefix:
+    required: true
+  public:
+    required: false
+  private:
+    required: false
+  file:
+    required: false
+runs:
+  using: composite
+  steps:
+  - run: |
+      python3 $GITHUB_ACTION_PATH/action.py "${{ inputs.path }}" "${{ inputs.prefix }}" "${{ inputs.public }}" "${{ inputs.private }}" "${{ inputs.file }}"
+      source $GITHUB_ENV
+    shell: bash
